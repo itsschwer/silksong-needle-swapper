@@ -28,8 +28,6 @@ namespace PaleOilSoap
             new HarmonyLib.Harmony(Info.Metadata.GUID).PatchAll();
 
             Logger.LogMessage("~awake.");
-
-            Logger.LogWarning(Application.streamingAssetsPath);
         }
 
         private void Update()
