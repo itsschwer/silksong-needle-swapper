@@ -10,8 +10,7 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
 ## how?
 
 - with the Needle selected in the Inventory menu:
-    - use the Sprint input *(default: `c`)* to "downgrade" the needle
-        - use the Attack input on controller instead(? — should be transforming/reloading certain Tools)
+    - use the Sprint input *(default: `c`; use the Attack input on controller)* to "downgrade" the needle
     - use the Jump input *(default: `z`; equivalent on controller)* to "upgrade" the needle
 <!--  -->
 - ranges from the following (from downgraded to upgraded):
