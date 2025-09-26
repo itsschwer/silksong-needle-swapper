@@ -1,0 +1,10 @@
+﻿{
+	"author": "itsschwer",
+	"name": "PaleOilSoap",
+	"version_number": "0.0.0",
+	"website_url": "https://github.com/itsschwer/",
+	"description": "",
+	"dependencies": [
+		"BepInEx-BepInExPack_Silksong-5.4.2303"
+	]
+}
