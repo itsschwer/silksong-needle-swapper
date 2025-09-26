@@ -1,8 +1,8 @@
 ﻿{
 	"author": "itsschwer",
-	"name": "PaleOilSoap",
+	"name": "NeedleSwapper",
 	"version_number": "0.1.0",
-	"website_url": "https://github.com/itsschwer/",
+	"website_url": "https://github.com/itsschwer/silksong-needle-swapper",
 	"description": "A small mod that allows you to downgrade (change) which Needle upgrade Hornet uses — check the README!",
 	"dependencies": [
 		"BepInEx-BepInExPack_Silksong-5.4.2303"

@@ -1,4 +1,4 @@
-# pale oil soap
+# needle swapper
 
 A small mod that allows you to change which Needle upgrade Hornet uses.
 
@@ -39,7 +39,7 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
     - **however, you should always make a backup of your save files, just in case**
 
 ## issues? questions? fixes?
-- open an issue on the [GitHub repository]()!
+- open an issue on the [GitHub repository](https://github.com/itsschwer/silksong-needle-swapper/issues)!
     - bug reports
     - suggestions *(e.g. README readability)*
 
