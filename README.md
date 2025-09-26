@@ -34,7 +34,7 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
 <!--  -->
 - only modifies the inventory appearance and damage calculations
     - *i.e. doesn't (shouldn't) affect completion percentage / game progression; non-permanent*
-    - note: [damage calculation](https://hollowknight.wiki/w/Damage_Values_and_Enemy_Health_(Silksong)#Damage_Calculation) is complicated in Silksong because needle damage is multiplied by enemy-specific modifers, depending on which needle upgrade you have
+    - note: [damage calculation](https://hollowknight.wiki/w/Damage_Values_and_Enemy_Health_(Silksong)#Damage_Calculation) is complicated in Silksong because needle damage is multiplied by enemy-specific modifiers dependent on which needle upgrade you have
 <!--  -->
 - **this mod should be safe to install and uninstall without affecting your save file at all**
     - **however, you should always make a backup of your save files, just in case**
