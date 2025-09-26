@@ -65,7 +65,7 @@ namespace PaleOilSoap
                 audioEvent.PitchMax = pitch;
             }
 
-            UnityEngine.AudioSource s = audioEvent.SpawnAndPlayOneShot(GlobalSettings.Audio.DefaultUIAudioSourcePrefab, UnityEngine.Vector3.zero);
+            audioEvent.SpawnAndPlayOneShot(GlobalSettings.Audio.DefaultUIAudioSourcePrefab, UnityEngine.Vector3.zero);
         }
     }
 }
