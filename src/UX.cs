@@ -25,10 +25,45 @@ namespace PaleOilSoap
 
         private static void ChangeNail(InventoryItemNail nail, int delta)
         {
+            int before = Plugin.Config.TargetNeedleUpgradeLevel;
             Plugin.Config.TargetNeedleUpgradeLevel += delta;
             nail.UpdateState(); // Update sprite
             nail.UpdateDisplay(); // Update description
-            Plugin.Logger.LogDebug(Plugin.Config.TargetNeedleUpgradeLevel);
+            Plugin.Logger.LogDebug($"Changed {nameof(Plugin.Config.TargetNeedleUpgradeLevel)} from {before} to {Plugin.Config.TargetNeedleUpgradeLevel}");
+
+            PlayAudioFeedback(before);
+        }
+
+        private static void PlayAudioFeedback(int before)
+        {
+            Config c = Plugin.Config;
+            PlayerData d = PlayerData.instance;
+
+            if (d == null) {
+                Plugin.Logger.LogWarning($"Tried to play audio feedback but {nameof(PlayerData)}.{nameof(PlayerData.instance)} is null!");
+                return;
+            }
+
+            AudioEvent audioEvent = default;
+            audioEvent.PitchMin = 0.95f;
+            audioEvent.PitchMax = 1.05f;
+            audioEvent.Volume = 1f;
+
+            if (c.TargetNeedleUpgradeLevel < 0) {
+                audioEvent.Clip = Plugin.Assets.disableSound;
+            }
+            else if (!c.AllowTargetAboveUpgradedLevel && c.TargetNeedleUpgradeLevel > d.nailUpgrades
+                || before == c.TargetNeedleUpgradeLevel) {
+                audioEvent.Clip = Plugin.Assets.constrainedSound;
+            }
+            else {
+                audioEvent.Clip = Plugin.Assets.overrideSound;
+                float pitch = 1f + (0.1f * (c.TargetNeedleUpgradeLevel + 1));
+                audioEvent.PitchMin = pitch;
+                audioEvent.PitchMax = pitch;
+            }
+
+            audioEvent.SpawnAndPlayOneShot(UnityEngine.Camera.main.transform.position);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace PaleOilSoap
         internal static new BepInEx.Logging.ManualLogSource Logger { get; private set; }
 
         internal static new Config Config { get; private set; }
+        internal static new Assets Assets { get; private set; }
 
         private void Awake()
         {
@@ -22,10 +23,13 @@ namespace PaleOilSoap
             Logger = BepInEx.Logging.Logger.CreateLogSource(Plugin.GUID);
 
             Config = new Config(base.Config);
+            Assets = new Assets();
 
             new HarmonyLib.Harmony(Info.Metadata.GUID).PatchAll();
 
             Logger.LogMessage("~awake.");
+
+            Logger.LogWarning(Application.streamingAssetsPath);
         }
 
         private void Update()
