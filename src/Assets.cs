@@ -5,7 +5,7 @@ namespace PaleOilSoap
 {
     internal sealed class Assets
     {
-        public bool initialized = false;
+        public bool initialized => (disableSound && overrideSound && constrainedSound);
 
         public readonly AudioClip disableSound;
         public readonly AudioClip overrideSound;
@@ -22,11 +22,9 @@ namespace PaleOilSoap
                 return;
             }
 
-            disableSound = assetBundle.LoadAsset<AudioClip>("hornet_hunter_needleart_slash_2");
-            overrideSound = assetBundle.LoadAsset<AudioClip>("hornet_needle_catch");
-            constrainedSound = assetBundle.LoadAsset<AudioClip>("sword_hit_reject");
-            initialized = (disableSound && overrideSound && constrainedSound);
-
+            disableSound = assetBundle.LoadAsset<AudioClip>("Assets/Audio/SFX/Heroes/Hornet/Crest Weapons/hornet_hunter_needleart_slash_2.wav");
+            overrideSound = assetBundle.LoadAsset<AudioClip>("Assets/Audio/SFX/Enemy/Bosses/Hornet/hornet_needle_catch.wav");
+            constrainedSound = assetBundle.LoadAsset<AudioClip>("Assets/Audio/SFX/sword_hit_reject.wav");
             assetBundle.Unload(false);
 
             if (initialized) Plugin.Logger.LogDebug("Located assets.");

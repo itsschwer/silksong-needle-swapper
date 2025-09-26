@@ -63,9 +63,9 @@ namespace PaleOilSoap
                 float pitch = 1f + (0.1f * (c.TargetNeedleUpgradeLevel + 1));
                 audioEvent.PitchMin = pitch;
                 audioEvent.PitchMax = pitch;
-            }     
+            }
 
-            audioEvent.SpawnAndPlayOneShot(UnityEngine.Camera.main.transform.position);
+            audioEvent.SpawnAndPlayOneShot(UnityEngine.Vector3.zero);
         }
     }
 }
