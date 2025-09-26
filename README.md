@@ -37,6 +37,7 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
 <!--  -->
 - **this mod should be safe to install and uninstall without affecting your save file at all**
     - **however, you should always make a backup of your save files, just in case**
+    - testing was conducted, but i am only one person
 
 ## issues? questions? fixes?
 - open an issue on the [GitHub repository](https://github.com/itsschwer/silksong-needle-swapper/issues)!
