@@ -1,4 +1,5 @@
 using BepInEx;
+using UnityEngine;
 
 namespace PaleOilSoap
 {
@@ -12,13 +13,27 @@ namespace PaleOilSoap
 
         internal static new BepInEx.Logging.ManualLogSource Logger { get; private set; }
 
+        internal static new Config Config { get; private set; }
+
         private void Awake()
         {
             // Use Plugin.GUID instead of Plugin.Name as source name
             BepInEx.Logging.Logger.Sources.Remove(base.Logger);
             Logger = BepInEx.Logging.Logger.CreateLogSource(Plugin.GUID);
 
+            Config = new Config(base.Config);
+
+            new HarmonyLib.Harmony(Info.Metadata.GUID).PatchAll();
+
             Logger.LogMessage("~awake.");
+        }
+
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.Home) && Input.GetKeyDown(KeyCode.End)) {
+                Plugin.Logger.LogWarning("Debugging input triggered, reloading config.");
+                Config.Reload();
+            }
         }
     }
 }
