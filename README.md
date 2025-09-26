@@ -46,5 +46,3 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
 
 ## todo
 - only allow at bench
-- fix non-working audio feedback — ***need help!***
-    - *open an issue on the GitHub repository if you have any info!*
