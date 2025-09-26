@@ -65,7 +65,21 @@ namespace PaleOilSoap
                 audioEvent.PitchMax = pitch;
             }
 
-            audioEvent.SpawnAndPlayOneShot(UnityEngine.Vector3.zero);
+            UnityEngine.Vector3 pos = bruteForce?.transform.position ?? UnityEngine.Vector3.zero;
+            audioEvent.SpawnAndPlayOneShot(pos);
+        }
+
+
+        private static UnityEngine.AudioListener? _bruteForce;
+        private static UnityEngine.AudioListener? bruteForce {
+            get {
+                if (_bruteForce == null) {
+                    _bruteForce = UnityEngine.Object.FindAnyObjectByType<UnityEngine.AudioListener>();
+                    if (_bruteForce != null) Plugin.Logger.LogDebug($"Found {nameof(UnityEngine.AudioListener)}: {_bruteForce.name}");
+                    else Plugin.Logger.LogWarning($"Failed to find {nameof(UnityEngine.AudioListener)}");
+                }
+                return _bruteForce;
+            }
         }
     }
 }
