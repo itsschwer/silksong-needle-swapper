@@ -8,11 +8,11 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
 *(e.g. cleaning up optional bosses, [Godhome](https://thunderstore.io/c/hollow-knight-silksong/p/Cuckson/Godhome/))*
 
 ## how?
-> *equivalent controller inputs should also work!*
 
 - with the Needle selected in the Inventory menu:
     - use the Sprint input *(default: `c`)* to "downgrade" the needle
     - use the Jump input *(default: `z`)* to "upgrade" the needle
+    - *equivalent controller inputs should also work!*
 <!--  -->
 - ranges from the following (from downgraded to upgraded):
     - unmodded nail *(i.e. what you have without the mod)* ← **default setting**
