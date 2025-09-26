@@ -1,5 +1,7 @@
 # poking around
 
+- save editor: https://bloodorca.github.io/hollow/
+
 ```cs
 // also GameManager.CreateRestorePoint
 private void GameManager.SaveGame(/**/) {

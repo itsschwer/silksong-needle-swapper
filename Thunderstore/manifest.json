@@ -1,7 +1,7 @@
 ﻿{
 	"author": "itsschwer",
 	"name": "NeedleSwapper",
-	"version_number": "0.1.0",
+	"version_number": "0.2.0",
 	"website_url": "https://github.com/itsschwer/silksong-needle-swapper",
 	"description": "A small mod that allows you to downgrade (change) which Needle upgrade Hornet uses — check the README!",
 	"dependencies": [
