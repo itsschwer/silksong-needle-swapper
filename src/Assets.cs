@@ -18,18 +18,19 @@ namespace PaleOilSoap
             AssetBundle assetBundle = AssetBundle.LoadFromFile(path);
 
             if (assetBundle == null) {
-                Plugin.Logger.LogError("Failed to locate asset bundle!");
+                Plugin.Logger.LogWarning("Failed to locate asset bundle.");
                 return;
             }
 
             disableSound = assetBundle.LoadAsset<AudioClip>("hornet_hunter_needleart_slash_2");
             overrideSound = assetBundle.LoadAsset<AudioClip>("hornet_needle_catch");
             constrainedSound = assetBundle.LoadAsset<AudioClip>("sword_hit_reject");
-            initialized = true;
+            initialized = (disableSound && overrideSound && constrainedSound);
 
             assetBundle.Unload(false);
 
-            Plugin.Logger.LogDebug("Located assets.");
+            if (initialized) Plugin.Logger.LogDebug("Located assets.");
+            else Plugin.Logger.LogWarning("Failed to locate assets.");
         }
     }
 }

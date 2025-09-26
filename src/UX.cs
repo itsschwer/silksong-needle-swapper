@@ -63,12 +63,7 @@ namespace PaleOilSoap
                 float pitch = 1f + (0.1f * (c.TargetNeedleUpgradeLevel + 1));
                 audioEvent.PitchMin = pitch;
                 audioEvent.PitchMax = pitch;
-            }
-
-            if (audioEvent.Clip == null) {
-                Plugin.Logger.LogWarning($"Tried to play audio feedback but audio clip is null!");
-                return;
-            }
+            }     
 
             audioEvent.SpawnAndPlayOneShot(UnityEngine.Camera.main.transform.position);
         }
