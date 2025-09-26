@@ -9,12 +9,12 @@ namespace PaleOilSoap
         public const string GUID = Author + "." + Name;
         public const string Author = "itsschwer";
         public const string Name = "PaleOilSoap";
-        public const string Version = "0.0.0";
+        public const string Version = "0.1.0";
 
         internal static new BepInEx.Logging.ManualLogSource Logger { get; private set; }
 
         internal static new Config Config { get; private set; }
-        internal static new Assets Assets { get; private set; }
+        internal static Assets Assets { get; private set; }
 
         private void Awake()
         {
