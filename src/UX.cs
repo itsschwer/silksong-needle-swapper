@@ -10,37 +10,33 @@ namespace PaleOilSoap
         [HarmonyPostfix, HarmonyPatch(typeof(InventoryItemNail), nameof(InventoryItemNail.Start))]
         private static void InventoryItemNail_Start(InventoryItemNail __instance)
         {
-            Plugin.Logger.LogWarning(__instance is InventoryItemNail);
-
-            InventoryPaneList root = __instance.GetComponentInParent<InventoryPaneList>();
-            if (root == null) {
-                Plugin.Logger.LogWarning($"Tried to set up button prompts but parent {nameof(InventoryPaneList)} could not be found!");
-                return;
-            }
-
-            InventoryItemToolManager tools = root.GetComponentInChildren<InventoryItemToolManager>(true);
-            if (tools == null) {
-                Plugin.Logger.LogWarning($"Tried to set up button prompts but sibling {nameof(InventoryItemToolManager)} could not be found!");
-                return;
-            }
-
             InventoryItemButtonPrompt copy = __instance.GetComponent<InventoryItemButtonPrompt>();
             if (copy == null) {
                 Plugin.Logger.LogWarning($"Tried to set up button prompts but {nameof(InventoryItemNail)} did not have any to copy from!");
                 return;
             }
 
+            // Hard-coded, not ideal; obtained through Unity Explorer on Voltvessels (Lightning Rod) tool
+            TeamCherry.Localization.LocalisedString transformMsg = new TeamCherry.Localization.LocalisedString("Tools", "UI_BUTTON_TOGGLE_STATE");
+
+            // Will NRE in OnEnable when adding component because appearCondition is not set yet
             InventoryItemButtonPrompt downgradePrompt = __instance.gameObject.AddComponent<InventoryItemButtonPrompt>();
             downgradePrompt.appearCondition = copy.appearCondition;
             downgradePrompt.display = copy.display;
-            downgradePrompt.data.ResponseText = tools.transformMsg;
+            downgradePrompt.data.ResponseText = transformMsg;
+            downgradePrompt.data.Action = GlobalEnums.HeroActionButton.MENU_EXTRA;
+            // MENU_EXTRA is None on keyboard but DASH is incorrect for gamepad (uses ATTACK instead); see global::ControlReminder.MapActionToAction
 
+            // Will NRE in OnEnable when adding component because appearCondition is not set yet
             InventoryItemButtonPrompt upgradePrompt = __instance.gameObject.AddComponent<InventoryItemButtonPrompt>();
             upgradePrompt.appearCondition = downgradePrompt.appearCondition;
             upgradePrompt.display = downgradePrompt.display;
             upgradePrompt.data.ResponseText = downgradePrompt.data.ResponseText;
+            upgradePrompt.data.Action = GlobalEnums.HeroActionButton.JUMP;
+            // MENU_SUBMIT shows Enter on keyboard; see global::ControlReminder.MapActionToAction
 
-            Plugin.Logger.LogDebug($"Set up button prompts.");
+            Plugin.Logger.LogDebug($"Set up button prompts." +
+                $"\n The preceding two instances of {nameof(System.NullReferenceException)} from {nameof(InventoryItemButtonPromptBase<bool>)}.{nameof(InventoryItemButtonPrompt.OnEnable)} should be safe to ignore (no elegant workaround).");
         }
 
         [HarmonyPatch(nameof(InventoryItemSelectable.Submit)), HarmonyPostfix]
