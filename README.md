@@ -44,6 +44,22 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
     - bug reports
     - suggestions *(e.g. README readability)*
 
+### known issues
+- the "Transform" button prompt for "downgrading" the needle does not update properly if switching between gamepad and keyboard
+    - ***help needed!** — open an issue on the GitHub repository if you have any info!*
+- the following error message will be logged when the Inventory menu is initialised:
+    ```log
+    [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+    Stack trace:
+    InventoryItemButtonPromptBase`1[TData].OnEnable () (at <9d3c4ed299074c2e91377d5f75e5a0ec>:0)
+    UnityEngine.GameObject:AddComponent()
+    PaleOilSoap.UX:InventoryItemNail_Start(InventoryItemNail)
+    InventoryItemNail:DMD<InventoryItemNail::Start>(InventoryItemNail)
+    ```
+    - this is safe to ignore but there doesn't seem to be an elegant solution to avoid emitting this error
+
 ## todo
 - only allow at bench
-- show input prompts (how?)
+    - can copy `global::InventoryItemToolManager.CanChangeEquips`
+        - but how implement sit at bench prompt?
+    - **is this even desirable/necessary?**
