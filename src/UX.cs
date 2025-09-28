@@ -7,6 +7,42 @@ namespace PaleOilSoap
     [HarmonyPatch(typeof(InventoryItemSelectable))]
     internal static class UX
     {
+        [HarmonyPostfix, HarmonyPatch(typeof(InventoryItemNail), nameof(InventoryItemNail.Start))]
+        private static void InventoryItemNail_Start(InventoryItemNail __instance)
+        {
+            Plugin.Logger.LogWarning(__instance is InventoryItemNail);
+
+            InventoryPaneList root = __instance.GetComponentInParent<InventoryPaneList>();
+            if (root == null) {
+                Plugin.Logger.LogWarning($"Tried to set up button prompts but parent {nameof(InventoryPaneList)} could not be found!");
+                return;
+            }
+
+            InventoryItemToolManager tools = root.GetComponentInChildren<InventoryItemToolManager>(true);
+            if (tools == null) {
+                Plugin.Logger.LogWarning($"Tried to set up button prompts but sibling {nameof(InventoryItemToolManager)} could not be found!");
+                return;
+            }
+
+            InventoryItemButtonPrompt copy = __instance.GetComponent<InventoryItemButtonPrompt>();
+            if (copy == null) {
+                Plugin.Logger.LogWarning($"Tried to set up button prompts but {nameof(InventoryItemNail)} did not have any to copy from!");
+                return;
+            }
+
+            InventoryItemButtonPrompt downgradePrompt = __instance.gameObject.AddComponent<InventoryItemButtonPrompt>();
+            downgradePrompt.appearCondition = copy.appearCondition;
+            downgradePrompt.display = copy.display;
+            downgradePrompt.data.ResponseText = tools.transformMsg;
+
+            InventoryItemButtonPrompt upgradePrompt = __instance.gameObject.AddComponent<InventoryItemButtonPrompt>();
+            upgradePrompt.appearCondition = downgradePrompt.appearCondition;
+            upgradePrompt.display = downgradePrompt.display;
+            upgradePrompt.data.ResponseText = downgradePrompt.data.ResponseText;
+
+            Plugin.Logger.LogDebug($"Set up button prompts.");
+        }
+
         [HarmonyPatch(nameof(InventoryItemSelectable.Submit)), HarmonyPostfix]
         private static void InventoryItemSelectable_Submit(InventoryItemSelectable __instance)
         {

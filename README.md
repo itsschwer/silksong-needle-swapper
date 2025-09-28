@@ -46,3 +46,4 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
 
 ## todo
 - only allow at bench
+- show input prompts (how?)
