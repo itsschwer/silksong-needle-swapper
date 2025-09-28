@@ -24,7 +24,7 @@ namespace PaleOilSoap
             downgradePrompt.appearCondition = copy.appearCondition;
             downgradePrompt.display = copy.display;
             downgradePrompt.data.ResponseText = transformMsg;
-            downgradePrompt.data.Action = GlobalEnums.HeroActionButton.MENU_EXTRA;
+            downgradePrompt.data.Action = Platform.Current && Platform.Current.WasLastInputKeyboard ? GlobalEnums.HeroActionButton.DASH : GlobalEnums.HeroActionButton.MENU_EXTRA;
             // MENU_EXTRA is None on keyboard but DASH is incorrect for gamepad (uses ATTACK instead); see global::ControlReminder.MapActionToAction
 
             // Will NRE in OnEnable when adding component because appearCondition is not set yet
