@@ -21,6 +21,8 @@ namespace PaleOilSoap
         internal Config(ConfigFile config)
         {
             file = config;
+            config.SaveOnConfigSet = false;
+
 
             const string Needle = "Needle";
 
@@ -32,6 +34,10 @@ namespace PaleOilSoap
 
             allowTargetAboveUpgradedLevel = config.Bind<bool>(Needle, nameof(allowTargetAboveUpgradedLevel), false,
                 "Allow targetNeedleUpgradeLevel to use levels higher than has been acquired through the Pinmaster.");
+
+
+            config.SaveOnConfigSet = true;
+            config.Save();
         }
     }
 }
