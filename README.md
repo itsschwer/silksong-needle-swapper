@@ -30,6 +30,7 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
         - *e.g. if you're capped at Shining Needle but have spammed "upgrade", you may need to "downgrade" multiple times before Shining Needle becomes Sharpened Needle*
         - this is because the `targetNeedleUpgradeLevel` is shared across save files
     - you can remove this limit by setting the config option `allowTargetAboveUpgradedLevel` to `true`
+        > *Note: config options are only read on game launch, so you may need to **relaunch the game to apply changes**. Alternatively, you may use the keyboard shortcut `home`+`end` (intended for debugging) to reload the config while the game is running.*
 <!--  -->
 - only modifies the inventory appearance and damage calculations
     - *i.e. doesn't (shouldn't) affect completion percentage / game progression; non-permanent*
@@ -43,9 +44,13 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
 - open an issue on the [GitHub repository](https://github.com/itsschwer/silksong-needle-swapper/issues)!
     - bug reports
     - suggestions *(e.g. README readability)*
+- changing BepInEx config options (`BepInEx.cfg`) *`Logging.Console` → `LogLevels`* and *`Logging.Disk` → `LogLevels`* to include `All` allows you to see debug-level logs omitted by the default `BepInExPack_Silksong` config
+    - this may be helpful for investigating issues (and attaching `LogOutput.log`)
 
 ### known issues
 - the "Transform" button prompt for "downgrading" the needle does not update properly if switching between gamepad and keyboard
+    - **workaround**: return to main menu and load the save using the desired input scheme
+        - *loading a save with **only mouse input will also result in gamepad prompts** (as the game has not detected a keyboard)!*
     - ***help needed!** — open an issue on the GitHub repository if you have any info!*
 - the following error message will be logged when the Inventory menu is initialised:
     ```log
