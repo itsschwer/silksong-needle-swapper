@@ -1,3 +1,8 @@
+### 0.3.1
+- More verbose debug logging
+- Update README
+    - document additional notes related to debugging and known issues
+
 ## 0.3.0
 - Add button prompts for "upgrading"/"downgrading"
 
