@@ -8,7 +8,7 @@ namespace PaleOilSoap
     [HarmonyPatch]
     internal static class NailUpgrades
     {
-        private static int AdjustNailUpgrade(int acquiredNailUpgrade)
+        internal static int AdjustNailUpgrade(int acquiredNailUpgrade)
         {
             Config c = Plugin.Config;
 

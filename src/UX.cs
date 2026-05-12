@@ -24,8 +24,9 @@ namespace PaleOilSoap
             downgradePrompt.appearCondition = copy.appearCondition;
             downgradePrompt.display = copy.display;
             downgradePrompt.data.ResponseText = transformMsg;
-            downgradePrompt.data.Action = Platform.Current && Platform.Current.WasLastInputKeyboard ? GlobalEnums.HeroActionButton.DASH : GlobalEnums.HeroActionButton.MENU_EXTRA;
+            downgradePrompt.data.Action = ControlReminder.MapActionToAction(GlobalEnums.HeroActionButton.MENU_EXTRA);
             // MENU_EXTRA is None on keyboard but DASH is incorrect for gamepad (uses ATTACK instead); see global::ControlReminder.MapActionToAction
+            // This means the downgrade button prompt will be incorrect if switching between gamepad and keyboard
 
             // Will NRE in OnEnable when adding component because appearCondition is not set yet
             InventoryItemButtonPrompt upgradePrompt = __instance.gameObject.AddComponent<InventoryItemButtonPrompt>();
@@ -33,10 +34,10 @@ namespace PaleOilSoap
             upgradePrompt.display = downgradePrompt.display;
             upgradePrompt.data.ResponseText = downgradePrompt.data.ResponseText;
             upgradePrompt.data.Action = GlobalEnums.HeroActionButton.JUMP;
-            // MENU_SUBMIT shows Enter on keyboard; see global::ControlReminder.MapActionToAction
+            // MENU_SUBMIT shows Enter on keyboard, so JUMP is safer for both keyboard and gamepad; see global::ControlReminder.MapActionToAction
 
-            Plugin.Logger.LogDebug($"Set up button prompts." +
-                $"\n The preceding two instances of {nameof(System.NullReferenceException)} from {nameof(InventoryItemButtonPromptBase<bool>)}.{nameof(InventoryItemButtonPrompt.OnEnable)} should be safe to ignore (no elegant workaround).");
+            Plugin.Logger.LogInfo($"Set up button prompts (with {nameof(Platform.Current.WasLastInputKeyboard)}: {Platform.Current?.WasLastInputKeyboard})" +
+                $"\nThe preceding two instances of {nameof(System.NullReferenceException)} from {nameof(InventoryItemButtonPromptBase<bool>)}.{nameof(InventoryItemButtonPrompt.OnEnable)} should be safe to ignore (no elegant workaround).");
         }
 
         [HarmonyPatch(nameof(InventoryItemSelectable.Submit)), HarmonyPostfix]
@@ -61,8 +62,9 @@ namespace PaleOilSoap
             Plugin.Config.TargetNeedleUpgradeLevel += delta;
             nail.UpdateState(); // Update sprite
             nail.UpdateDisplay(); // Update description
-            Plugin.Logger.LogDebug($"Changed {nameof(Plugin.Config.TargetNeedleUpgradeLevel)} from {before} to {Plugin.Config.TargetNeedleUpgradeLevel}");
-
+            string debugAdditionalLine = (PlayerData.instance == null) ? "{nameof(PlayerData)}.{nameof(PlayerData.instance)} is null??" : $"AcquiredNailUpgrades: {PlayerData.instance.nailUpgrades}}} (resolves as {NailUpgrades.AdjustNailUpgrade(PlayerData.instance.nailUpgrades)}";
+            Plugin.Logger.LogDebug($"Changed {nameof(Plugin.Config.TargetNeedleUpgradeLevel)} from {before} to {Plugin.Config.TargetNeedleUpgradeLevel}" +
+                $"\n\t{{{nameof(Plugin.Config.AllowTargetAboveUpgradedLevel)}: {Plugin.Config.AllowTargetAboveUpgradedLevel}, {debugAdditionalLine})");
             PlayAudioFeedback(before);
         }
 
