@@ -1,3 +1,4 @@
+### 0.3.2
 - Fix incompatibility with **`silksong_modding-SilksongPrepatcher`**
 
 ### 0.3.1
