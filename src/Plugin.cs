@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace PaleOilSoap
 {
+    [BepInDependency(Compatibility.SilksongPrepatcherGUID, BepInDependency.DependencyFlags.SoftDependency)]
     [BepInPlugin(GUID, Name, Version)]
     public sealed class Plugin : BaseUnityPlugin
     {
