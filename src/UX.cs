@@ -70,7 +70,10 @@ namespace PaleOilSoap
 
         private static void PlayAudioFeedback(int before)
         {
-            if (!Plugin.Assets.initialized) return;
+            if (!Plugin.Assets.initialized) {
+                Plugin.Logger.LogWarning($"Tried to play audio feedback but {nameof(Assets)}.{nameof(Assets.initialized)} is {Plugin.Assets.initialized}!");
+                return;
+            }
 
             Config c = Plugin.Config;
             PlayerData d = PlayerData.instance;

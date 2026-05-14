@@ -39,7 +39,7 @@ namespace PaleOilSoap
             ];
 
             if (Compatibility.PrepatcherPresent) {
-                Plugin.Logger.LogWarning($"Detected '{Compatibility.SilksongPrepatcherGUID}', trying alternative IL instruction match.");
+                Plugin.Logger.LogDebug($"Detected '{Compatibility.SilksongPrepatcherGUID}', trying alternative IL instruction match.");
                 match = [
                     // int num = PlayerData.instance.GetInt("nailUpgrades");
                     // x => x.MatchCallOrCallvirt<PlayerData>($"get_{nameof(PlayerData.instance)}"),
