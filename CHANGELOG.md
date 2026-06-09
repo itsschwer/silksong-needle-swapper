@@ -1,3 +1,8 @@
+- Try fix missing audio when installed with certain other mods
+    - *Try improve asset loading robustness*
+    - *Tested with **`cometcake575-Architect`** (and dependencies)*
+    > *I'm not really sure if this is a proper solution. Let me know if there is a better way of handling game assets!*
+
 ### 0.3.2
 - Fix incompatibility with **`silksong_modding-SilksongPrepatcher`**
 

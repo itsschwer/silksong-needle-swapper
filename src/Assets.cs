@@ -14,7 +14,9 @@ namespace PaleOilSoap
 
         public Assets()
         {
-            // Assuming existing loaded bundle will not be unloaded (given "sfxstatic_assets_shared")
+            // Need to check if asset bundle has already been loaded to avoid error:
+            //   The AssetBundle 'StreamingAssets\aa\StandaloneWindows64\sfxstatic_assets_shared.bundle' can't be loaded because another AssetBundle with the same files is already loaded.
+            // Assuming existing loaded bundle will not be unloaded (given "static_assets_shared")
             string guid = "81cdd0803a8bcfb81097fa4b8f33bb6e.bundle";
             AssetBundle assetBundle = AssetBundle.GetAllLoadedAssetBundles().FirstOrDefault((bundle) => bundle.name == guid);
             if (assetBundle != null) {
