@@ -48,10 +48,14 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
     - this may be helpful for investigating issues (and attaching `LogOutput.log`)
 
 ### known issues
-- the "Transform" button prompt for "downgrading" the needle does not update properly if switching between gamepad and keyboard
-    - **workaround**: return to main menu and load the save using the desired input scheme
-        - *loading a save with **only mouse input will also result in gamepad prompts** (as the game has not detected a keyboard)!*
-    - ***help needed!** — open an issue on the GitHub repository if you have any info!*
+
+<details>
+<summary><b>inconsequential issues</b> <i>(click to show/hide)</i></summary>
+
+- the "Transform" button prompts for "downgrading"/"upgrading" the needle does not update properly if switching between gamepad and keyboard while the needle is selected
+    - this shouldn't usually come up in regular gameplay, but deselecting and reselecting the needle will resync the prompts with the current control scheme
+    - there doesn't seem to be a more elegant solution than what is currently implemented
+<!--  -->
 - the following error message will be logged when the Inventory menu is initialised:
     ```log
     [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
@@ -62,6 +66,8 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
     InventoryItemNail:DMD<InventoryItemNail::Start>(InventoryItemNail)
     ```
     - this is safe to ignore but there doesn't seem to be an elegant solution to avoid emitting this error
+
+</details>
 
 ## todo
 - only allow at bench
