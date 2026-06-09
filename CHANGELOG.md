@@ -1,3 +1,4 @@
+### 0.3.3
 - Try fix missing audio when installed with certain other mods
     - *Try improve asset loading robustness*
     - *Tested with **`cometcake575-Architect`** (and dependencies)*
