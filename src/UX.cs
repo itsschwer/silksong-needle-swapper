@@ -27,9 +27,6 @@ namespace PaleOilSoap
             upgradePrompt.data.ResponseText = transformText;
             upgradePrompt.menuAction = Platform.MenuActions.Submit;
 
-            // The Voltvessels transform prompt uses MenuButtonIcon, which converts a Platform.MenuActions to a HeroActionButton when updating the display,
-            // whereas InventoryItemButtonPrompt is fed into ActionButtonIcon, which only has a set HeroActionButton with no conversion when updating the display
-
             Plugin.Logger.LogInfo($"Set up button prompts (with {nameof(Platform.Current.WasLastInputKeyboard)}: {Platform.Current?.WasLastInputKeyboard})" +
                 $"\nThe preceding two instances of {nameof(System.NullReferenceException)} from {nameof(InventoryItemButtonPromptBase<bool>)}.{nameof(InventoryItemButtonPrompt.OnEnable)} should be safe to ignore (no elegant workaround).");
         }

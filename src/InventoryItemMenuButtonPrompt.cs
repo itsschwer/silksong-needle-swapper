@@ -2,11 +2,27 @@
 
 namespace PaleOilSoap
 {
+    /// <summary>
+    /// The Voltvessels transform prompt uses MenuButtonIcon, which converts a Platform.MenuActions to a HeroActionButton when updating the display,
+    /// whereas InventoryItemButtonPrompt is fed into ActionButtonIcon, which only has a set HeroActionButton with no conversion when updating the display.
+    ///
+    /// The least invasive workaround seems to be updating the data source right before it is fed to ActionButtonIcon.
+    /// This means that the button prompt will be correct for the input type at the time of selection,
+    /// but may desync if the input type is changed while the item is selected (deselecting and reselecting will resync).
+    /// </summary>
     internal class InventoryItemMenuButtonPrompt : InventoryItemButtonPrompt
     {
-        private InputHandler ih; // see global::ActionButtonIconBase
+        private Platform.MenuActions _menuAction;
+        public Platform.MenuActions menuAction {
+            get {
+                return _menuAction;
+            }
+            set {
+                _menuAction = value;
+                data.Action = Action;
+            }
+        }
 
-        internal Platform.MenuActions menuAction;
         public HeroActionButton Action {
             // see global::MenuButtonIcon.Action
             get {
@@ -38,30 +54,11 @@ namespace PaleOilSoap
             }
         }
 
-        // Base class has a private OnEnable, so cannot override
-        private void Awake()
+        public override void OnShow(InventoryItemButtonPromptDisplayList displayList, InventoryItemButtonPromptData data)
         {
-            if (ih == null) {
-                ih = GameManager.instance.inputHandler;
-            }
-            if (ih != null) {
-                ih.RefreshActiveControllerEvent += Ih_RefreshActiveControllerEvent;
-            }
-        }
-
-        // Base class has a private OnDisable, so cannot override
-        private void OnDestroy()
-        {
-            if (ih != null) {
-                ih.RefreshActiveControllerEvent -= Ih_RefreshActiveControllerEvent;
-            }
-        }
-
-        private void Ih_RefreshActiveControllerEvent()
-        {
-            Plugin.Logger.LogWarning(data.Action);
+            // Will only update upon reselecting the inventory item (compromise)
             data.Action = Action;
-            Plugin.Logger.LogInfo(data.Action);
+            base.OnShow(displayList, data);
         }
     }
 }
