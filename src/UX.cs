@@ -17,30 +17,30 @@ namespace PaleOilSoap
             }
 
             // Hard-coded, not ideal; obtained through Unity Explorer on Voltvessels (Lightning Rod) tool
-            TeamCherry.Localization.LocalisedString transformMsg = new TeamCherry.Localization.LocalisedString("Tools", "UI_BUTTON_TOGGLE_STATE");
+            TeamCherry.Localization.LocalisedString transformText = new TeamCherry.Localization.LocalisedString("Tools", "UI_BUTTON_TOGGLE_STATE");
 
-            // Will NRE in OnEnable when adding component because appearCondition is not set yet
-            InventoryItemButtonPrompt downgradePrompt = __instance.gameObject.AddComponent<InventoryItemButtonPrompt>();
-            downgradePrompt.appearCondition = copy.appearCondition;
-            downgradePrompt.display = copy.display;
-            downgradePrompt.data.ResponseText = transformMsg;
-            downgradePrompt.data.Action = ControlReminder.MapActionToAction(GlobalEnums.HeroActionButton.MENU_EXTRA);
-            // MENU_EXTRA is None on keyboard but DASH is incorrect for gamepad (uses ATTACK instead); see global::ControlReminder.MapActionToAction
-            // This means the downgrade button prompt will be incorrect if switching between gamepad and keyboard
+            InventoryItemMenuButtonPrompt downgradePrompt = SetUpPrompt(copy);
+            downgradePrompt.data.ResponseText = transformText;
+            downgradePrompt.menuAction = Platform.MenuActions.Extra;
 
-            // Will NRE in OnEnable when adding component because appearCondition is not set yet
-            InventoryItemButtonPrompt upgradePrompt = __instance.gameObject.AddComponent<InventoryItemButtonPrompt>();
-            upgradePrompt.appearCondition = downgradePrompt.appearCondition;
-            upgradePrompt.display = downgradePrompt.display;
-            upgradePrompt.data.ResponseText = downgradePrompt.data.ResponseText;
-            upgradePrompt.data.Action = GlobalEnums.HeroActionButton.JUMP;
-            // MENU_SUBMIT shows Enter on keyboard, so JUMP is safer for both keyboard and gamepad; see global::ControlReminder.MapActionToAction
+            InventoryItemMenuButtonPrompt upgradePrompt = SetUpPrompt(copy);
+            upgradePrompt.data.ResponseText = transformText;
+            upgradePrompt.menuAction = Platform.MenuActions.Submit;
 
             // The Voltvessels transform prompt uses MenuButtonIcon, which converts a Platform.MenuActions to a HeroActionButton when updating the display,
             // whereas InventoryItemButtonPrompt is fed into ActionButtonIcon, which only has a set HeroActionButton with no conversion when updating the display
 
             Plugin.Logger.LogInfo($"Set up button prompts (with {nameof(Platform.Current.WasLastInputKeyboard)}: {Platform.Current?.WasLastInputKeyboard})" +
                 $"\nThe preceding two instances of {nameof(System.NullReferenceException)} from {nameof(InventoryItemButtonPromptBase<bool>)}.{nameof(InventoryItemButtonPrompt.OnEnable)} should be safe to ignore (no elegant workaround).");
+        }
+
+        private static InventoryItemMenuButtonPrompt SetUpPrompt(InventoryItemButtonPrompt copy)
+        {
+            // Will NRE in OnEnable when adding component because appearCondition is not set yet
+            InventoryItemMenuButtonPrompt prompt = copy.gameObject.AddComponent<InventoryItemMenuButtonPrompt>();
+            prompt.appearCondition = copy.appearCondition;
+            prompt.display = copy.display;
+            return prompt;
         }
 
         [HarmonyPatch(nameof(InventoryItemSelectable.Submit)), HarmonyPostfix]
