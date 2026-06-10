@@ -1,3 +1,4 @@
+## 0.4.0
 - Add config option `capTargetToObtainedUpgradeLevel`
     - *default: true; changes default behaviour by capping the internal tracker to the current save's max upgrade level to avoid requiring multiple "downgrades" to see a change in applied Needle level*
 - Avoid NullReferenceException in InventoryItemButtonPromptBase.OnEnable()

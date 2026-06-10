@@ -10,7 +10,7 @@ namespace PaleOilSoap
         public const string GUID = Author + "." + Name;
         public const string Author = "itsschwer";
         public const string Name = "NeedleSwapper";
-        public const string Version = "0.3.3";
+        public const string Version = "0.4.0";
 
         internal static new BepInEx.Logging.ManualLogSource Logger { get; private set; }
 
