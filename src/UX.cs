@@ -60,6 +60,18 @@ namespace PaleOilSoap
         {
             int before = Plugin.Config.TargetNeedleUpgradeLevel;
             Plugin.Config.TargetNeedleUpgradeLevel += delta;
+            
+            if (PlayerData.instance != null) {
+                Config c = Plugin.Config;
+                PlayerData d = PlayerData.instance;
+
+                if (c.CapTargetToObtainedUpgradeLevel) {
+                    if (!c.AllowTargetAboveUpgradedLevel && c.TargetNeedleUpgradeLevel > d.nailUpgrades) {
+                        c.TargetNeedleUpgradeLevel = d.nailUpgrades;
+                    }
+                }
+            }
+
             nail.UpdateState(); // Update sprite
             nail.UpdateDisplay(); // Update description
             string debugAdditionalLine = (PlayerData.instance == null) ? "{nameof(PlayerData)}.{nameof(PlayerData.instance)} is null??" : $"AcquiredNailUpgrades: {PlayerData.instance.nailUpgrades}}} (resolves as {NailUpgrades.AdjustNailUpgrade(PlayerData.instance.nailUpgrades)}";
