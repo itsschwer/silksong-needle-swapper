@@ -29,6 +29,7 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
     - the mod's internal tracker can still increase to the last possible upgrade, so you may need to hit the "downgrade" input multiple times to see a change
         - *e.g. if you're capped at Shining Needle but have spammed "upgrade", you may need to "downgrade" multiple times before Shining Needle becomes Sharpened Needle*
         - this is because the `targetNeedleUpgradeLevel` is shared across save files
+        - this is mostly mitigated by `capTargetToObtainedUpgradeLevel`
     - you can remove this limit by setting the config option `allowTargetAboveUpgradedLevel` to `true`
         > *Note: config options are only read on game launch, so you may need to **relaunch the game to apply changes**. Alternatively, you may use the keyboard shortcut `home`+`end` (intended for debugging) to reload the config while the game is running.*
 <!--  -->

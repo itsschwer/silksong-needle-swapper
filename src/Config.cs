@@ -40,7 +40,7 @@ namespace PaleOilSoap
 
             capTargetToObtainedUpgradeLevel = config.Bind<bool>(Needle, nameof(capTargetToObtainedUpgradeLevel), true,
                 "Prevent targetNeedleUpgradeLevel from becoming higher than what has been acquired through the Pinmaster when allowTargetAboveUpgradeLevel is false." +
-                "\n\nEssentially caps the internal tracker to the current save's maximum upgrade level, to avoid requiring multiple \"downgrades\" to see a change.");
+                "\n\nEssentially caps the internal tracker to the current save's maximum upgrade level, to avoid requiring multiple \"downgrades\" to see a change in applied Needle level.");
 
             config.SaveOnConfigSet = true;
             config.Save();
