@@ -52,20 +52,9 @@ i want to be able to downgrade my needle so bosses don't die so quickly!
 <details>
 <summary><b>inconsequential issues</b> <i>(click to show/hide)</i></summary>
 
-- the "Transform" button prompts for "downgrading"/"upgrading" the needle does not update properly if switching between gamepad and keyboard while the needle is selected
+- the "Transform" button prompts for "downgrading"/"upgrading" the needle do not update properly if switching between gamepad and keyboard while the needle is selected
     - this shouldn't usually come up in regular gameplay, but deselecting and reselecting the needle will resync the prompts with the current control scheme
     - there doesn't seem to be a more elegant solution than what is currently implemented
-<!--  -->
-- the following error message will be logged when the Inventory menu is initialised:
-    ```log
-    [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-    Stack trace:
-    InventoryItemButtonPromptBase`1[TData].OnEnable () (at <9d3c4ed299074c2e91377d5f75e5a0ec>:0)
-    UnityEngine.GameObject:AddComponent()
-    PaleOilSoap.UX:InventoryItemNail_Start(InventoryItemNail)
-    InventoryItemNail:DMD<InventoryItemNail::Start>(InventoryItemNail)
-    ```
-    - this is safe to ignore but there doesn't seem to be an elegant solution to avoid emitting this error
 
 </details>
 

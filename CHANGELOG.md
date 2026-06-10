@@ -1,3 +1,6 @@
+- Avoid NullReferenceException in InventoryItemButtonPromptBase.OnEnable()
+    - *Extending the component allows for sidestepping OnEnable before component is fully initialised*
+
 ### 0.3.3
 - Try fix missing audio when installed with certain other mods
     - *Try improve asset loading robustness*

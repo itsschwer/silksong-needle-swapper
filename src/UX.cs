@@ -27,16 +27,16 @@ namespace PaleOilSoap
             upgradePrompt.data.ResponseText = transformText;
             upgradePrompt.menuAction = Platform.MenuActions.Submit;
 
-            Plugin.Logger.LogInfo($"Set up button prompts (with {nameof(Platform.Current.WasLastInputKeyboard)}: {Platform.Current?.WasLastInputKeyboard})" +
-                $"\nThe preceding two instances of {nameof(System.NullReferenceException)} from {nameof(InventoryItemButtonPromptBase<bool>)}.{nameof(InventoryItemButtonPrompt.OnEnable)} should be safe to ignore (no elegant workaround).");
+            Plugin.Logger.LogInfo($"Set up button prompts (with {nameof(Platform.Current.WasLastInputKeyboard)}: {Platform.Current?.WasLastInputKeyboard})");
         }
 
         private static InventoryItemMenuButtonPrompt SetUpPrompt(InventoryItemButtonPrompt copy)
         {
-            // Will NRE in OnEnable when adding component because appearCondition is not set yet
             InventoryItemMenuButtonPrompt prompt = copy.gameObject.AddComponent<InventoryItemMenuButtonPrompt>();
             prompt.appearCondition = copy.appearCondition;
             prompt.display = copy.display;
+            // InventoryItemMenuButtonPrompt disables itself on awake to avoid NRE from unassigned appearCondition, so need to re-enable once assigned
+            prompt.enabled = true;
             return prompt;
         }
 

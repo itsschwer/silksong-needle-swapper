@@ -10,7 +10,7 @@ namespace PaleOilSoap
     /// This means that the button prompt will be correct for the input type at the time of selection,
     /// but may desync if the input type is changed while the item is selected (deselecting and reselecting will resync).
     /// </summary>
-    internal class InventoryItemMenuButtonPrompt : InventoryItemButtonPrompt
+    internal sealed class InventoryItemMenuButtonPrompt : InventoryItemButtonPrompt
     {
         private Platform.MenuActions _menuAction;
         public Platform.MenuActions menuAction {
@@ -59,6 +59,12 @@ namespace PaleOilSoap
             // Will only update upon reselecting the inventory item (compromise)
             data.Action = Action;
             base.OnShow(displayList, data);
+        }
+
+        private void Awake()
+        {
+            // Avoid NRE from unassigned appearCondition
+            enabled = false;
         }
     }
 }
